@@ -174,7 +174,7 @@ async function queueInKV(turnData, env) {
   }
 
   try {
-    const queueKey = `queue:${Date.now()}:${Math.random().toString(36).substr(2, 9)}`;
+    const queueKey = `queue:${Date.now()}:${Math.random().toString(36).slice(2, 11)}`;
     await env.QUEUE_KV.put(
       queueKey,
       JSON.stringify({

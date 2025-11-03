@@ -47,7 +47,7 @@ async function handleTurnResolved(request, env, ctx) {
       );
     } else if (result.rateLimited) {
       // If rate limited, queue the request in KV
-      await queueInKV(turnData, env);
+      await queueInKV(turnData, env, result.retryAfter);
 
       // Schedule retry processing
       ctx.waitUntil(processQueue(env));
@@ -167,20 +167,21 @@ async function writeToNotion(turnData, env) {
 /**
  * Queue turn data in KV storage when rate limited
  */
-async function queueInKV(turnData, env) {
+async function queueInKV(turnData, env, retryAfter = null) {
   if (!env.QUEUE_KV) {
     console.warn('KV namespace not configured, skipping queue');
     return;
   }
 
   try {
-    const queueKey = `queue:${Date.now()}:${Math.random().toString(36).slice(2, 11)}`;
+    const queueKey = `queue:${Date.now()}:${crypto.randomUUID()}`;
     await env.QUEUE_KV.put(
       queueKey,
       JSON.stringify({
         data: turnData,
         timestamp: Date.now(),
         retries: 0,
+        retryAfter: retryAfter,
       }),
       {
         expirationTtl: 86400, // 24 hours

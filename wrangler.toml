@@ -3,6 +3,8 @@ main = "src/index.js"
 compatibility_date = "2024-01-01"
 
 # KV namespace binding for rate-limit queue
+# IMPORTANT: Replace 'YOUR_KV_NAMESPACE_ID' with actual KV namespace ID
+# Create using: wrangler kv:namespace create "QUEUE_KV"
 [[kv_namespaces]]
 binding = "QUEUE_KV"
 id = "YOUR_KV_NAMESPACE_ID"

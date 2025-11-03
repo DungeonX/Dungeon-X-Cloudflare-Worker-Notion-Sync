@@ -1,0 +1,12 @@
+name = "dungeon-x-notion-sync"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+# KV namespace binding for rate-limit queue
+[[kv_namespaces]]
+binding = "QUEUE_KV"
+id = "YOUR_KV_NAMESPACE_ID"
+
+# Environment variables (set via wrangler secret)
+# NOTION_API_KEY - Notion integration token
+# NOTION_DATABASE_ID - Target Notion database ID

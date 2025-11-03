@@ -1,0 +1,21 @@
+{
+  "name": "dungeon-x-notion-sync-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker for syncing turn data to Notion",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "notion",
+    "sync"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
